@@ -1,0 +1,147 @@
+fileFormatVersion: 2
+guid: a6086ee921cfb784d91c09079f07ea1c
+timeCreated: 1429258860
+licenseType: Store
+ModelImporter:
+  serializedVersion: 18
+  fileIDToRecycleName:
+    100000: MapIcon11
+    100002: MapIcon12
+    100004: MapIcon7
+    100006: MapIcon8
+    100008: MapIconBeverageMachine
+    100010: MapIconColdOne
+    100012: MapIconHammer
+    100014: MapIconHiddenPackage
+    100016: MapIconHome
+    100018: MapIconMission
+    100020: MapIconNorth
+    100022: MapIconOutfitSign
+    100024: MapIconParkingSign
+    100026: //RootNode
+    100028: MapIconSafe
+    100030: MapIconStar
+    100032: MapIconTarget
+    400000: MapIcon11
+    400002: MapIcon12
+    400004: MapIcon7
+    400006: MapIcon8
+    400008: MapIconBeverageMachine
+    400010: MapIconColdOne
+    400012: MapIconHammer
+    400014: MapIconHiddenPackage
+    400016: MapIconHome
+    400018: MapIconMission
+    400020: MapIconNorth
+    400022: MapIconOutfitSign
+    400024: MapIconParkingSign
+    400026: //RootNode
+    400028: MapIconSafe
+    400030: MapIconStar
+    400032: MapIconTarget
+    2300000: MapIcon11
+    2300002: MapIcon12
+    2300004: MapIcon7
+    2300006: MapIcon8
+    2300008: MapIconBeverageMachine
+    2300010: MapIconColdOne
+    2300012: MapIconHammer
+    2300014: MapIconHiddenPackage
+    2300016: MapIconHome
+    2300018: MapIconMission
+    2300020: MapIconNorth
+    2300022: MapIconOutfitSign
+    2300024: MapIconParkingSign
+    2300026: MapIconSafe
+    2300028: MapIconStar
+    2300030: MapIconTarget
+    3300000: MapIcon11
+    3300002: MapIcon12
+    3300004: MapIcon7
+    3300006: MapIcon8
+    3300008: MapIconBeverageMachine
+    3300010: MapIconColdOne
+    3300012: MapIconHammer
+    3300014: MapIconHiddenPackage
+    3300016: MapIconHome
+    3300018: MapIconMission
+    3300020: MapIconNorth
+    3300022: MapIconOutfitSign
+    3300024: MapIconParkingSign
+    3300026: MapIconSafe
+    3300028: MapIconStar
+    3300030: MapIconTarget
+    4300000: MapIcon11
+    4300002: MapIconNorth
+    4300004: MapIconHammer
+    4300006: MapIconHome
+    4300008: MapIconStar
+    4300010: MapIconTarget
+    4300012: MapIconMission
+    4300014: MapIcon7
+    4300016: MapIcon8
+    4300018: MapIconColdOne
+    4300020: MapIconHiddenPackage
+    4300022: MapIcon12
+    4300024: MapIconParkingSign
+    4300026: MapIconOutfitSign
+    4300028: MapIconSafe
+    4300030: MapIconBeverageMachine
+  materials:
+    importMaterials: 0
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationCompression: 0
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
