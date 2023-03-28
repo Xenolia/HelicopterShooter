@@ -279,7 +279,7 @@ namespace HeurekaGames.AssetHunterPRO
                 case BuildTargetGroup.WSA:
                     {
                         List<Texture2D> textures = new List<Texture2D>();
-                        textures.Add(AssetDatabase.LoadAssetAtPath<Texture2D>(PlayerSettings.WSA.packageLogo));
+                      //  textures.Add(AssetDatabase.LoadAssetAtPath<Texture2D>(PlayerSettings.WSA.packageLogo));
 
                         foreach (PlayerSettings.WSAImageType imageType in Enum.GetValues(typeof(PlayerSettings.WSAImageType)))
                         {
