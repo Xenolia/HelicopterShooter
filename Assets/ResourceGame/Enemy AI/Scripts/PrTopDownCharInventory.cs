@@ -222,12 +222,21 @@ public class PrTopDownCharInventory : MonoBehaviour {
         CreateNoiseTrigger();
 
         //Start PlayerInfo to Load and Save player Info across levels
-        if (GameObject.Find("playerInfo_" + charController.playerNmb) && charController.playerSettings.TypeSelected == PrPlayerSettings.GameMode.SinglePlayer)
+        if(charController)
         {
-            Debug.Log("Player Info already Found");
-            charController.LoadPlayerInfo();
-            SetHealth(ActualHealth);
+            Debug.LogError("ss");
         }
+        GameObject asd = GameObject.Find("playerInfo_" + charController.playerNmb);
+        if (asd)
+            {
+            if (asd && charController.playerSettings.TypeSelected == PrPlayerSettings.GameMode.SinglePlayer)
+            {
+                Debug.Log("Player Info already Found");
+                charController.LoadPlayerInfo();
+                SetHealth(ActualHealth);
+            }
+        }
+       
 
         //Weapon Instantiate and initialization
         if (InitialWeapons.Length > 0)
@@ -1555,8 +1564,10 @@ public class PrTopDownCharInventory : MonoBehaviour {
         EnableArmIK(false);
 		isDead = true;
 		//charAnimator.SetBool("Dead", true);
-
+        if(charController)
         charController.m_isDead = true;
+
+        if(Weapon[ActiveWeapon])
         Weapon[ActiveWeapon].GetComponent<PrWeapon>().TurnOffLaser();
 
         //Set invisible to Bullets
