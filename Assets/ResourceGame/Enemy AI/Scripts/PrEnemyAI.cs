@@ -1445,7 +1445,7 @@ public class PrEnemyAI : MonoBehaviour
                 }
                 else if (hit.collider.CompareTag("Player") || hit.collider.CompareTag("AIPlayer"))
                 {
-                    //Debug.Log("Seeing Player " + player.transform.position);
+                    Debug.Log("Seeing Player ");
                     //Debug.DrawRay(actualSensorPos, targetDir, Color.magenta);
 
                     playerIsVisible = true;

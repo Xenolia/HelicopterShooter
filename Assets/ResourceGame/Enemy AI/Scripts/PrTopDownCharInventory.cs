@@ -224,18 +224,18 @@ public class PrTopDownCharInventory : MonoBehaviour {
         //Start PlayerInfo to Load and Save player Info across levels
         if(charController)
         {
-            Debug.LogError("ss");
-        }
-        GameObject asd = GameObject.Find("playerInfo_" + charController.playerNmb);
-        if (asd)
+            GameObject asd = GameObject.Find("playerInfo_" + charController.playerNmb);
+            if (asd)
             {
-            if (asd && charController.playerSettings.TypeSelected == PrPlayerSettings.GameMode.SinglePlayer)
-            {
-                Debug.Log("Player Info already Found");
-                charController.LoadPlayerInfo();
-                SetHealth(ActualHealth);
+                if (asd && charController.playerSettings.TypeSelected == PrPlayerSettings.GameMode.SinglePlayer)
+                {
+                    Debug.Log("Player Info already Found");
+                    charController.LoadPlayerInfo();
+                    SetHealth(ActualHealth);
+                }
             }
         }
+ 
        
 
         //Weapon Instantiate and initialization
@@ -335,12 +335,15 @@ public class PrTopDownCharInventory : MonoBehaviour {
         if (oneShotHealth)
             ApplyOneShotHealth();
 
-        
-        //Create Player Info object if isn´t there yet
-        if (GameObject.Find("playerInfo_" + charController.playerNmb) == null && charController.playerSettings.TypeSelected == PrPlayerSettings.GameMode.SinglePlayer)
+        if(charController)
         {
-            charController.CreatePlayerInfo();
+            //Create Player Info object if isn´t there yet
+            if (GameObject.Find("playerInfo_" + charController.playerNmb) == null && charController.playerSettings.TypeSelected == PrPlayerSettings.GameMode.SinglePlayer)
+            {
+                charController.CreatePlayerInfo();
+            }
         }
+       
     }
 
     public void LoadBulletsAndClipsState(int weapon)
@@ -407,10 +410,7 @@ public class PrTopDownCharInventory : MonoBehaviour {
                     weapInt += 1;
             }
 
-            if (GameObject.Find("playerInfo_" + charController.playerNmb))
-            {
-                LoadBulletsAndClipsState(weapType);
-            }
+            
 
             weapType += 1;
         }
@@ -1020,7 +1020,7 @@ public class PrTopDownCharInventory : MonoBehaviour {
     {
         PrWeapon ActualW = Weapon[ActiveWeapon].GetComponent<PrWeapon>();
         Weapon[ActiveWeapon].SetActive(true);
-        HUDWeaponPicture.GetComponent<UnityEngine.UI.Image>().sprite = ActualW.WeaponPicture;
+       // HUDWeaponPicture.GetComponent<UnityEngine.UI.Image>().sprite = ActualW.WeaponPicture;
         //
 
         ActualW.ShootTarget = AimTarget;
@@ -1070,10 +1070,11 @@ public class PrTopDownCharInventory : MonoBehaviour {
 
         ActualW.Audio = WeaponR.GetComponent<AudioSource>();
 
+        /*
         if (ActualW.Type == global::PrWeapon.WT.Pistol)
         {
-            int PistolLayer = charAnimator.GetLayerIndex("PistolLyr");
-            charAnimator.SetLayerWeight(PistolLayer, 1.0f);
+          //  int PistolLayer = charAnimator.GetLayerIndex("PistolLyr");
+          //  charAnimator.SetLayerWeight(PistolLayer, 1.0f);
             int PistolActLayer = charAnimator.GetLayerIndex("PistolActions");
             charAnimator.SetLayerWeight(PistolActLayer, 1.0f);
             charAnimator.SetBool("Armed", true);
@@ -1104,10 +1105,13 @@ public class PrTopDownCharInventory : MonoBehaviour {
         }
 
         Weapon[ActiveWeapon].GetComponent<PrWeapon>().UpdateWeaponGUI(HUDWeaponPicture);
+        */
     }
 
     void InitializeHUD()
     {
+        return;
+
         if (HUDDamageFullScreen)
             HUDDamageFullScreen.GetComponent<UnityEngine.UI.Image>().color = new Vector4(1, 1, 1, 0);
 
@@ -1308,7 +1312,7 @@ public class PrTopDownCharInventory : MonoBehaviour {
             Weapon[ActiveWeapon].SetActive(true);
 
             InitializeWeapons();
-            Weapon[ActiveWeapon].GetComponent<PrWeapon>().UpdateWeaponGUI(HUDWeaponPicture);
+           
 
 
         }
@@ -1575,7 +1579,11 @@ public class PrTopDownCharInventory : MonoBehaviour {
         GetComponent<Collider>().enabled = false;
         
         this.tag = "Untagged";
-        charController.playerSelection.enabled = false;
+        if(charController)
+        {
+            charController.playerSelection.enabled = false;
+
+        }
 
         DestroyHUD();
 
@@ -1588,7 +1596,9 @@ public class PrTopDownCharInventory : MonoBehaviour {
         }
 
         //Send Message to Game script to notify Dead
+         if(charController)
         SendMessageUpwards("PlayerDied", charController.playerNmb, SendMessageOptions.DontRequireReceiver);
+
         SendMessageUpwards("NewFrag", enemyTeam, SendMessageOptions.DontRequireReceiver);
         GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
         foreach (GameObject i in enemies)

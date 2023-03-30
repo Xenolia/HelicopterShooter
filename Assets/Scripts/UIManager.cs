@@ -24,8 +24,7 @@ public class UIManager : MonoBehaviour
         }
         Totalcoins.text = "$" + PlayerPrefs.GetInt("COINS", 0);
         // PlayerPrefs.SetInt("Level", (CurrentLevel + 1));
-        Adcontrol.instance.ShowAds();
-    }
+     }
 
     // Update is called once per frame
     void Update()

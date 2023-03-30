@@ -309,6 +309,10 @@ public class PrBullet : MonoBehaviour {
             else if (HitTag == "Player")
             {
                 GameManager.instance.Score();
+
+
+
+
                 //GameManager.instance.GameOver();
                 //  Debug.Log("Bullet team = " + team + " Target Team = " + Target.GetComponent<PrTopDownCharInventory>().team);
                 Target.SendMessage("PlayerTeam", team, SendMessageOptions.DontRequireReceiver);

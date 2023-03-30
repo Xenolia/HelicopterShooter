@@ -152,7 +152,7 @@ public class PrWeapon : MonoBehaviour {
     {
         Audio = transform.parent.GetComponent<AudioSource>();
 
-       
+       /*
         if (!AIWeapon)
         {
             HUDWeaponBullets.GetComponent<Text>().text = (ActualBullets / BulletsPerShoot).ToString();
@@ -162,6 +162,7 @@ public class PrWeapon : MonoBehaviour {
 
             team = Player.GetComponent<PrTopDownCharInventory>().team;
         }
+       */
 
         //Basic Object Pooling Initialization ONLY FOR RANGED WEAPONS
         if (Type == WT.Rifle || Type == WT.Pistol || Type == WT.Minigun || Type == WT.RocketLauncher)
@@ -298,8 +299,8 @@ public class PrWeapon : MonoBehaviour {
 
     public void SetupQuickReload()
     {
-        HUDquickRelaodZone.GetComponent<RectTransform>().localPosition = new Vector3(HUDquickReloadTimes[0] * 46.0f, 0, 0);
-        HUDquickRelaodZone.GetComponent<RectTransform>().localScale = new Vector3(HUDquickReloadTimes[1] - HUDquickReloadTimes[0], 1, 1);
+      //  HUDquickRelaodZone.GetComponent<RectTransform>().localPosition = new Vector3(HUDquickReloadTimes[0] * 46.0f, 0, 0);
+      //  HUDquickRelaodZone.GetComponent<RectTransform>().localScale = new Vector3(HUDquickReloadTimes[1] - HUDquickReloadTimes[0], 1, 1);
     }
 
     public void TryQuickReload()

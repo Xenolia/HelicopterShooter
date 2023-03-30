@@ -6,9 +6,12 @@ public class Helicopter : MonoBehaviour
 {
     public float speed;
     bool stepped;
+    int stepCount=0;
     // Start is called before the first frame update
     void Start()
     {
+        GameManager gameManager= GameObject.Find("GameManager").GetComponent<GameManager>();
+        stepCount = gameManager.Level[gameManager.CurrentLevel].GetComponent<FloorCount>().floorCount;
         stepped = false;
        // iTween.MoveBy(gameObject, iTween.Hash("y", -2, "easeType", "easeInOutExpo", "loopType", "none", "delay", .1));
     }
@@ -27,8 +30,11 @@ public class Helicopter : MonoBehaviour
     }
 
     void StepDown() {
+        if (stepCount >= 2)
+            return;
+
          iTween.MoveBy(gameObject, iTween.Hash("y", -2.5f, "easeType", "easeInOutExpo", "loopType", "none", "delay", .1));
          stepped = false;
-
+        stepCount++;
     }
 }

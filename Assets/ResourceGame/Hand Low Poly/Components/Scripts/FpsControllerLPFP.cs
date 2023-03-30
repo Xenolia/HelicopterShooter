@@ -141,29 +141,46 @@ namespace FPSControllerLPFP
             RotateCameraAndCharacter();
             MoveCharacter();
             _isGrounded = false;
+
+
         }
-			
+        private void LateUpdate()
+        {
+
+        }
         /// Moves the camera to the character, processes jumping and plays sounds every frame.
         private void Update()
         {
 			arms.position = transform.position + transform.TransformVector(armPosition);
-            Jump();
+             Jump();
             PlayFootstepSounds();
+ 
         }
 
         private void RotateCameraAndCharacter()
         {
-            var rotationX = _rotationX.Update(RotationXRaw, rotationSmoothness);
+             var rotationX = _rotationX.Update(RotationXRaw, rotationSmoothness);
             var rotationY = _rotationY.Update(RotationYRaw, rotationSmoothness);
+
+           
             var clampedY = RestrictVerticalRotation(rotationY);
             _rotationY.Current = clampedY;
-			var worldUp = arms.InverseTransformDirection(Vector3.up);
+
+
+
+            var clampedX = RestrictHorizontalRotation(rotationX);
+            _rotationX.Current = clampedX;
+
+
+             var worldUp = arms.InverseTransformDirection(Vector3.up);
 			var rotation = arms.rotation *
-                           Quaternion.AngleAxis(rotationX, worldUp) *
+                           Quaternion.AngleAxis(clampedX, worldUp) *
                            Quaternion.AngleAxis(clampedY, Vector3.left);
-            transform.eulerAngles = new Vector3(0f, rotation.eulerAngles.y, 0f);
-			arms.rotation = rotation;
-        }
+
+             transform.eulerAngles = new Vector3(0f, rotation.eulerAngles.y, 0f);
+
+            arms.rotation = rotation;
+         }
 			
         /// Returns the target rotation of the camera around the y axis with no smoothing.
         private float RotationXRaw
@@ -186,7 +203,14 @@ namespace FPSControllerLPFP
             var maxY = maxVerticalAngle + currentAngle;
             return Mathf.Clamp(mouseY, minY + 0.01f, maxY - 0.01f);
         }
-			
+        private float RestrictHorizontalRotation(float mouseX)
+        {
+           
+            var currentAngle = NormalizeAngle(arms.eulerAngles.z);
+            var minX = minVerticalAngle + currentAngle;
+            var maxX = maxVerticalAngle + currentAngle;
+            return Mathf.Clamp(mouseX, minX + 0.01f, maxX - 0.01f);
+        }
         /// Normalize an angle between -180 and 180 degrees.
         /// <param name="angleDegrees">angle to normalize</param>
         /// <returns>normalized angle</returns>
@@ -357,25 +381,25 @@ namespace FPSControllerLPFP
             /// Returns the value of the virtual axis mapped to move the character back and forth.        
             public float Move
             {
-                get { return Input.GetAxisRaw(move); }
+                get { return 0; }
             }
 				       
             /// Returns the value of the virtual axis mapped to move the character left and right.         
             public float Strafe
             {
-                get { return Input.GetAxisRaw(strafe); }
+                get { return 0; }
             }
 				    
             /// Returns true while the virtual button mapped to run is held down.          
             public bool Run
             {
-                get { return Input.GetButton(run); }
+                get { return false; }
             }
 				     
             /// Returns true during the frame the user pressed down the virtual button mapped to jump.          
             public bool Jump
             {
-                get { return Input.GetButtonDown(jump); }
+                get { return false; }
             }
         }
     }

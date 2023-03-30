@@ -110,7 +110,7 @@ public class PrTopDownCharController : MonoBehaviour {
         // get the transform of the main camera
         if (Camera.main != null)
         {
-            m_Cam = CamScript.transform.GetComponentInChildren<Camera>().transform;
+          //  m_Cam = CamScript.transform.GetComponentInChildren<Camera>().transform;
         }
         else
         {
@@ -279,10 +279,12 @@ public class PrTopDownCharController : MonoBehaviour {
 
     public void ActivateJoystick(bool IsOn)
     {
+        /*
         if (IsOn)
             AimTargetVisual.SetActive(false);
         else
             AimTargetVisual.SetActive(true);
+        */
     }
 
     public void EndRoll()
@@ -351,45 +353,13 @@ public class PrTopDownCharController : MonoBehaviour {
                 h = 0;
                 v = 0;
             }
-
-            //Roll
-
-            if (Input.GetButton(playerCtrlMap[10]) && !Rolling && !Inventory.UsingObject && Inventory.ActualStamina > RollStaminaUse)
-            {
-                if (evadeAction == EAction.Roll)
-                {
-                    Rolling = true;
-                    Inventory.Weapon[Inventory.ActiveWeapon].GetComponent<PrWeapon>().LaserSight.enabled = false;
-                    Inventory.Weapon[Inventory.ActiveWeapon].GetComponent<PrWeapon>().CancelReload();
-                    Inventory.ActualStamina -= RollStaminaUse;
-                    charAnimator.SetTrigger("Roll");
-                    if (RollVFX)
-                        Instantiate(RollVFX, transform.position, Quaternion.identity);
-                }
-            }
-
-            //Jump
-            if (Input.GetButton(playerCtrlMap[10]) &&!Rolling && !m_Jump && !Inventory.UsingObject && !crouch && Time.time >= lastJump + 0.2f && m_IsGrounded && b_canJump)
-            {
-                
-                if (evadeAction == EAction.Jump && !charAnimator.GetCurrentAnimatorStateInfo(0).IsName("JumpEnd"))
-                {
-
-                    lastJump = Time.time;
-                    Rolling = true;
-                    m_Jump = true;
-                    Inventory.Weapon[Inventory.ActiveWeapon].GetComponent<PrWeapon>().LaserSight.enabled = false;
-                    Inventory.Weapon[Inventory.ActiveWeapon].GetComponent<PrWeapon>().CancelReload();
-                    charAnimator.SetTrigger("Jump");
-                    if (RollVFX)
-                        Instantiate(RollVFX, transform.position, Quaternion.identity);
-                       
-                }
-            }
+             
+            
 
 
             if (b_CanRotate)
             {
+                /*
                 if (Inventory.Aiming && !Rolling)
                 {
                     if (!JoystickEnabled)
@@ -401,6 +371,7 @@ public class PrTopDownCharController : MonoBehaviour {
                 {
                     RunningLook(new Vector3(h, 0, v));
                 }
+                */
             }
 
             m_Move = new Vector3(h, 0, v);// * m_MoveSpeedSpecialModifier;
@@ -408,11 +379,11 @@ public class PrTopDownCharController : MonoBehaviour {
 
             m_Move = m_Move.normalized * m_MoveSpeedSpecialModifier;
             //Rotate move in camera space
-            m_Move = Quaternion.Euler(0, 0 - transform.eulerAngles.y + m_Cam.transform.parent.transform.eulerAngles.y, 0) * m_Move;
+          //  m_Move = Quaternion.Euler(0, 0 - transform.eulerAngles.y + m_Cam.transform.parent.transform.eulerAngles.y, 0) * m_Move;
 
             //Move Player
-            Move(m_Move, crouch, m_Jump);
-			m_Jump = false;
+//            Move(m_Move, crouch, m_Jump);
+	//		m_Jump = false;
 
             //Sprint
             if (Input.GetButton(playerCtrlMap[7]) && !Rolling && m_Move.magnitude >= 0.2f && !Inventory.UsingObject && !crouch)
@@ -441,14 +412,18 @@ public class PrTopDownCharController : MonoBehaviour {
             else
             {
                 Sprinting = false;
-                if (Inventory.alwaysAim)
+                if(Inventory)
                 {
-                    Inventory.Aiming = true;
-                    charAnimator.SetBool("Aiming", true);
+                    if (Inventory.alwaysAim)
+                    {
+                        Inventory.Aiming = true;
+                        charAnimator.SetBool("Aiming", true);
+                    }
                 }
+               
             }
 
-            Inventory.UsingStamina = Sprinting;
+//            Inventory.UsingStamina = Sprinting;
             
         }
         else
@@ -517,9 +492,10 @@ public class PrTopDownCharController : MonoBehaviour {
 			//Debug.Log("---------- Hit Something------------");
 			Vector3 FinalPos = new Vector3( hit.point.x, 0,hit.point.z);
 
+            /*
 			AimTargetVisual.transform.position = FinalPos;
 			AimTargetVisual.transform.LookAt(transform.position);
-			
+			*/
 		}
 	}
 	

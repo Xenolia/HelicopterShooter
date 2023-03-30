@@ -18,7 +18,7 @@ public class GameManager : MonoBehaviour
     public GameObject Helicopter;
     bool started;
 
-    int CurrentLevel;
+   public int CurrentLevel;
     [Header("Player")]
     public GameObject[] players;
 
@@ -55,6 +55,9 @@ public class GameManager : MonoBehaviour
         StartCoroutine(DelayStart());
 
 
+
+
+        
     }
 
     // Update is called once per frame
@@ -93,6 +96,9 @@ public class GameManager : MonoBehaviour
         life--;
         DamageVFX.SetTrigger("Hit");
         Health.text = "" + life;
+
+        
+
         if (life == 1) {
             DamageVFX.SetBool("Die", true);
             //DamageVFX.SetActive(true);
