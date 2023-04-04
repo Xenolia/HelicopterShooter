@@ -28,8 +28,12 @@ public class FixedTouchField : MonoBehaviour, IPointerDownHandler, IPointerUpHan
             TouchDist = new Vector2(0, 0); 
             return; 
         }
-        Debug.Log(Input.mousePosition.x);
+      //  Debug.Log(Input.mousePosition.x);
 
+        if(Input.mousePosition.x>=Screen.width)
+        {
+
+        }
         if (!IsMouseOverGameWindow)
         {
             TouchDist = new Vector2(0, 0);

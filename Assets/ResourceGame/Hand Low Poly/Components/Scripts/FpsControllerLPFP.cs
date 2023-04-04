@@ -156,10 +156,12 @@ namespace FPSControllerLPFP
             PlayFootstepSounds();
  
         }
-
+       
         private void RotateCameraAndCharacter()
         {
-             var rotationX = _rotationX.Update(RotationXRaw, rotationSmoothness);
+             var a= _rotationX.Update(RotationXRaw, rotationSmoothness);
+               
+             var rotationX = a;
             var rotationY = _rotationY.Update(RotationYRaw, rotationSmoothness);
 
            
@@ -168,20 +170,23 @@ namespace FPSControllerLPFP
 
 
 
-            var clampedX = RestrictHorizontalRotation(rotationX);
-            _rotationX.Current = clampedX;
+            // var clampedX = RestrictHorizontalRotation(rotationX);x
+            //  _rotationX.Current = clampedX;
 
 
-             var worldUp = arms.InverseTransformDirection(Vector3.up);
+            var worldUp = arms.InverseTransformDirection(Vector3.up);
 			var rotation = arms.rotation *
-                           Quaternion.AngleAxis(clampedX, worldUp) *
+                           Quaternion.AngleAxis(rotationX, worldUp) *
                            Quaternion.AngleAxis(clampedY, Vector3.left);
 
-             transform.eulerAngles = new Vector3(0f, rotation.eulerAngles.y, 0f);
+            //  Debug.Log(rotation.ToEulerAngles());
+            //  rotation.y=  Mathf.Clamp(rotation.y, helicopter.transform.rotation.y-35, helicopter.transform.rotation.y+ 35); 
+            transform.eulerAngles = new Vector3(0f, rotation.eulerAngles.y, 0f);
 
             arms.rotation = rotation;
-         }
-			
+
+        }
+
         /// Returns the target rotation of the camera around the y axis with no smoothing.
         private float RotationXRaw
         {
@@ -207,8 +212,8 @@ namespace FPSControllerLPFP
         {
            
             var currentAngle = NormalizeAngle(arms.eulerAngles.z);
-            var minX = minVerticalAngle + currentAngle;
-            var maxX = maxVerticalAngle + currentAngle;
+            var minX =-30;
+            var maxX = 30;
             return Mathf.Clamp(mouseX, minX + 0.01f, maxX - 0.01f);
         }
         /// Normalize an angle between -180 and 180 degrees.
@@ -309,9 +314,11 @@ namespace FPSControllerLPFP
             }
 				
             /// Returns the smoothed rotation.
-            public float Update(float target, float smoothTime)
+            public float Update(float target, float smoothTime )
             {
+                 
                 return _current = Mathf.SmoothDampAngle(_current, target, ref _currentVelocity, smoothTime);
+                 
             }
 
             public float Current

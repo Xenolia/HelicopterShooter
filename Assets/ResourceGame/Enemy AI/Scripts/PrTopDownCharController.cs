@@ -315,17 +315,12 @@ public class PrTopDownCharController : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
+ 
 
         //Time.timeScale = Slowmotion;
 
         if (Input.GetKeyDown(KeyCode.K) && playerNmb <= 1)
-        {
-            if (JoystickEnabled)
-                JoystickEnabled = false;
-            else
-                JoystickEnabled = true;
-
-            ActivateJoystick(JoystickEnabled);
+        { 
         }
 
         MouseTargetPos();
@@ -333,18 +328,9 @@ public class PrTopDownCharController : MonoBehaviour {
         if (!m_isDead && m_CanMove)
 		{
            
-            //Crouch
-            if (Input.GetKey(KeyCode.LeftControl) && playerNmb <= 1|| Input.GetButton(playerCtrlMap[12]))
-            {
-                print(playerCtrlMap[13]);
-                crouch = true;
-               
-            }            	
-            else
-            {
+            
                 crouch = false;
-            }	
-
+            
             float h = Input.GetAxis(playerCtrlMap[0]);
             float v = Input.GetAxis(playerCtrlMap[1]);
 
@@ -386,31 +372,7 @@ public class PrTopDownCharController : MonoBehaviour {
 	//		m_Jump = false;
 
             //Sprint
-            if (Input.GetButton(playerCtrlMap[7]) && !Rolling && m_Move.magnitude >= 0.2f && !Inventory.UsingObject && !crouch)
-            {
-                
-               
-                if (Inventory.ActualStamina > 0.0f)
-                {
-                    Sprinting = true;
-                    if (Inventory.alwaysAim)
-                    {
-                        Inventory.Aiming = false;
-                        charAnimator.SetBool("Aiming", false);
-                    }
-                }
-                else
-                {
-                    Sprinting = false;
-                    if (Inventory.alwaysAim)
-                    {
-                        Inventory.Aiming = true;
-                        charAnimator.SetBool("Aiming", true);
-                    }
-                }
-            }
-            else
-            {
+             
                 Sprinting = false;
                 if(Inventory)
                 {
@@ -420,8 +382,7 @@ public class PrTopDownCharController : MonoBehaviour {
                         charAnimator.SetBool("Aiming", true);
                     }
                 }
-               
-            }
+           
 
 //            Inventory.UsingStamina = Sprinting;
             

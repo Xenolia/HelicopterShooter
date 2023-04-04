@@ -203,8 +203,9 @@ public class PrEnemyAI : MonoBehaviour
         SetLayer();
         awarnessDistance = 14f;
         attackDistance = 7f;
+
         aimingDistance = 9f;
-    doNotAttackPlayer = false;
+  //  doNotAttackPlayer = false;
     }
     // Use this for initialization
     public virtual void Start()
