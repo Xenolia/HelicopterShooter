@@ -13,9 +13,30 @@ public class FixedTouchField : MonoBehaviour, IPointerDownHandler, IPointerUpHan
     public bool Pressed;
 
     // Update is called once per frame
-    
+    bool startWork = false;
+
+    private void Start()
+    {
+        startWork = true;
+    }
+    bool IsMouseOverGameWindow { get { return !(0 > Input.mousePosition.x || 0 > Input.mousePosition.y || Screen.width < Input.mousePosition.x || Screen.height < Input.mousePosition.y); } }
+
     void Update()
     {
+        if (!startWork)
+        {
+            TouchDist = new Vector2(0, 0); 
+            return; 
+        }
+        Debug.Log(Input.mousePosition.x);
+
+        if (!IsMouseOverGameWindow)
+        {
+            TouchDist = new Vector2(0, 0);
+            return;
+        }
+            
+
         Pressed = true;
         if (Pressed)
         {
@@ -30,7 +51,9 @@ public class FixedTouchField : MonoBehaviour, IPointerDownHandler, IPointerUpHan
             }
             else
             {
-                TouchDist = new Vector2(Input.mousePosition.x, Input.mousePosition.y) - PointerOld;
+                float a = Input.mousePosition.x;
+              //  Mathf.Clamp(a,0,100);
+                TouchDist = new Vector2(a, Input.mousePosition.y) - PointerOld;
                  PointerOld = Input.mousePosition;
                 //Debug.Log(PointerId + PointerOld.x +"  "+ PointerOld.y + "else");
             }

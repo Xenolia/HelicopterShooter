@@ -147,7 +147,7 @@ public class PrEnemyAI : MonoBehaviour
     private bool Damaged = false;
     private float DamagedTimer = 0.0f;
     public bool destroyDeadBody = false;
-    public float destroyDeadBodyTimer = 5.0f;
+    public float destroyDeadBodyTimer = 3.0f;
     [Space]
     public Transform BurnAndFrozenVFXParent;
     public GameObject frozenVFX;
@@ -198,9 +198,21 @@ public class PrEnemyAI : MonoBehaviour
     private PrCharacterIK CharacterIKController;
     private Transform ArmIKTarget;
 
+    void WaitForStart()
+    {
+        SetLayer();
+        awarnessDistance = 14f;
+        attackDistance = 7f;
+        aimingDistance = 9f;
+    doNotAttackPlayer = false;
+    }
     // Use this for initialization
     public virtual void Start()
     {
+        doNotAttackPlayer = true;
+
+        Invoke("WaitForStart",0.75f);
+        destroyDeadBodyTimer = 2f;
         //Debug
         if (DebugText && !DebugOn)
             DebugText.GetComponent<Renderer>().enabled = false;
@@ -678,7 +690,13 @@ public class PrEnemyAI : MonoBehaviour
             }
         }
     }
+    private void OnDisable()
+    {
+        if(GetComponentInParent<FloorManager>())
+        GetComponentInParent<FloorManager>().CheckStepDown();
 
+    }
+     
     void Die(bool temperatureDeath)
     {
         //Send Message to Spawners
@@ -701,9 +719,9 @@ public class PrEnemyAI : MonoBehaviour
         else if (type == enemyType.Soldier)
         {
             SoldierDestruction(temperatureDeath);
-        }
-
+        } 
         dead = true;
+       
         GameManager.instance.AddMoney();
     }
 
@@ -1415,25 +1433,37 @@ public class PrEnemyAI : MonoBehaviour
         }
 
     }
-
-    void PlayerVisibilityRay(Vector3 targetDir)
+    void SetLayer()
     {
-        RaycastHit hit;
+        int defa=0;
         int AIInt = 9;
         int objectInt = 8;
-        int dynamicsInt = 8;
+        int dynamicsInt = 11;
         int playerInt = 14;
+
+        int defealaeyer = 1 << defa;
+
         int playerLayer = 1 << playerInt;
         int AILayer = 1 << AIInt;
         int objectLayer = 1 << objectInt;
         int dynamicsLayer = 1 << dynamicsInt;
-        int finalMask = objectLayer | dynamicsLayer | AILayer | playerLayer;
+        finalMask = objectLayer | dynamicsLayer | AILayer | playerLayer |defealaeyer;
+    }
+    int finalMask;
+
+    void PlayerVisibilityRay(Vector3 targetDir)
+    {
+        RaycastHit hit;
+        SetLayer();
 
         if (!friendlyAI)
         {
             if (Physics.Raycast(actualSensorPos, targetDir, out hit, awarnessDistance, finalMask))
             //if (Physics.Raycast(actualSensorPos, targetDir, out hit))
             {
+
+              
+
                 if (!hit.collider.CompareTag("Player") && !hit.collider.CompareTag("AIPlayer"))
                 {
                     //Debug.Log("Can´t see Player");

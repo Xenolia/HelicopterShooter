@@ -35,14 +35,14 @@ public class MenuManager : MonoBehaviour {
 
 	public void RateUs ()
 	{
-        Application.OpenURL(RateUsUrl);
+      //  Application.OpenURL(RateUsUrl);
 
     }
 
 
     public void MoreGames(){
 
-		Application.OpenURL (MoreGamesURL);
+	//	Application.OpenURL (MoreGamesURL);
 	}
 
 

@@ -52,12 +52,7 @@ public class GameManager : MonoBehaviour
         float floorCount = Level[CurrentLevel].transform.childCount;
         floorCount = floorCount -2;
         Helicopter.transform.position = new Vector3(0,1.5f + (floorCount*2.5f),0);
-        StartCoroutine(DelayStart());
-
-
-
-
-        
+        StartCoroutine(DelayStart()); 
     }
 
     // Update is called once per frame
@@ -84,15 +79,27 @@ public class GameManager : MonoBehaviour
 
 
     public void GameWin() {
+
+        Invoke("GameWinDelay",1f);
+    }
+    void GameWinDelay()
+    {
         PlayerPrefs.SetInt("Level", (CurrentLevel + 1));
         SceneManager.LoadScene("GameWin");
     }
-
     public void GameOver() {
-        SceneManager.LoadScene("GameOver");
+        Invoke("GameOverDelay", 1f);
+
     }
 
+    void GameOverDelay()
+    {
+        SceneManager.LoadScene("GameOver");
+    }
     public void Score() {
+        if (life == 0)
+            return;
+
         life--;
         DamageVFX.SetTrigger("Hit");
         Health.text = "" + life;
