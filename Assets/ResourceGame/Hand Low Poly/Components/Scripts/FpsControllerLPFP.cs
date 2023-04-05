@@ -144,10 +144,7 @@ namespace FPSControllerLPFP
 
 
         }
-        private void LateUpdate()
-        {
-
-        }
+     
         /// Moves the camera to the character, processes jumping and plays sounds every frame.
         private void Update()
         {
@@ -159,6 +156,10 @@ namespace FPSControllerLPFP
        
         private void RotateCameraAndCharacter()
         {
+            if (_rotationX==null)
+                return;
+
+
              var a= _rotationX.Update(RotationXRaw, rotationSmoothness);
                
              var rotationX = a;

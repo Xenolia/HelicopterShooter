@@ -201,11 +201,12 @@ public class PrEnemyAI : MonoBehaviour
     void WaitForStart()
     {
         SetLayer();
-        awarnessDistance = 14f;
-        attackDistance = 7f;
+        lookAngle = 45f;
+        awarnessDistance = 15f;
+        attackDistance = 7.5f;
 
-        aimingDistance = 9f;
-  //  doNotAttackPlayer = false;
+        aimingDistance = 11f;
+    doNotAttackPlayer = false;
     }
     // Use this for initialization
     public virtual void Start()

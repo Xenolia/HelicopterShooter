@@ -3,6 +3,7 @@ using System.Collections;
 
 public class PrBullet : MonoBehaviour {
 
+    public bool playerBullet = false;
     public bool isGrenade = false;
     public float explodeTimer = 5.0f;
     public bool friendlyFire = true;
@@ -64,6 +65,8 @@ public class PrBullet : MonoBehaviour {
         if (GameObject.Find("PlayerCamera"))
             playerCamera = GameObject.Find("PlayerCamera").GetComponent<PrTopDownCamera>();
 
+
+        friendlyFire = false;
     }
 
     public void InitializePooling()
@@ -308,6 +311,11 @@ public class PrBullet : MonoBehaviour {
             }
             else if (HitTag == "Player")
             {
+                if (playerBullet)
+                {
+                    return;
+
+                }
                 GameManager.instance.Score();
 
 

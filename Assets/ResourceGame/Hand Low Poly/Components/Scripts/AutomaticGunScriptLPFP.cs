@@ -767,6 +767,11 @@ public class AutomaticGunScriptLPFP : MonoBehaviour {
 					Spawnpoints.bulletSpawnPoint.transform.position,
 					Spawnpoints.bulletSpawnPoint.transform.rotation);
 
+
+				if(transform.GetComponentInParent<Helicopter>()!=null)
+				{
+					bullet.GetComponent<PrBullet>().playerBullet = true;
+				}
 				//Add velocity to the bullet
 				bullet.GetComponent<Rigidbody>().velocity = 
 					bullet.transform.forward * bulletForce;

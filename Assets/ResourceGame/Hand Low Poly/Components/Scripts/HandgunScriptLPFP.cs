@@ -607,12 +607,17 @@ public class HandgunScriptLPFP : MonoBehaviour {
 					}
 				}
 			}
-				
+				 
 			//Spawn bullet at bullet spawnpoint
 			var bullet = (Transform)Instantiate (
 				Prefabs.bulletPrefab,
 				Spawnpoints.bulletSpawnPoint.transform.position,
 				Spawnpoints.bulletSpawnPoint.transform.rotation);
+
+			if(transform.GetComponentInParent<Helicopter>()!=null)
+			{
+				bullet.GetComponent<PrBullet>().playerBullet = true;
+			}
 
 			//Add velocity to the bullet
 			bullet.GetComponent<Rigidbody>().velocity = 

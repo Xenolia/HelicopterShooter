@@ -179,9 +179,17 @@ public class PrWeapon : MonoBehaviour {
                     GameBullets[i].name = WeaponName + "_Bullet_" + i.ToString();
                     GameBullets[i].transform.parent = BulletsParent.transform;
 
-                    GameBullets[i].GetComponent<PrBullet>().team = team;
-                    GameBullets[i].GetComponent<PrBullet>().usePooling = true;
-                    GameBullets[i].GetComponent<PrBullet>().InitializePooling();
+                    PrBullet prBullet= GameBullets[i].GetComponent<PrBullet>();
+                    prBullet.team = team;
+
+
+                    if (GetComponentInParent<Helicopter>()!=null)
+                    {
+                        prBullet.playerBullet = true;
+                    }
+                    prBullet.team = team;
+                    prBullet.usePooling = true;
+                    prBullet.InitializePooling();
                 }
             }
             
@@ -525,6 +533,7 @@ public class PrWeapon : MonoBehaviour {
                 if (ActualBullets > 0)
                 {
                     GameObject Bullet;
+                   
                     if (usePooling)
                     {
                         //Object Pooling Method 
@@ -533,8 +542,15 @@ public class PrWeapon : MonoBehaviour {
                         Bullet.transform.rotation = ShootFXPos.rotation;
                         Bullet.GetComponent<Rigidbody>().isKinematic = false;
                         Bullet.GetComponent<Collider>().enabled = true;
+
+                        if(GetComponentInParent<Helicopter>()!=null)
+                        {
+                            Bullet.GetComponent<PrBullet>().playerBullet = true;
+                        }
+                        
                         Bullet.GetComponent<PrBullet>().timeToLive = bulletTimeToLive;
                         Bullet.GetComponent<PrBullet>().ResetPooling();
+                       
                         Bullet.SetActive(true);
                         ActualGameBullet += 1;
                         if (ActualGameBullet >= GameBullets.Length)
@@ -542,24 +558,34 @@ public class PrWeapon : MonoBehaviour {
                     }
                     else
                     {
+
+                       
                         Bullet = Instantiate(BulletPrefab, ShootFXPos.position, ShootFXPos.rotation);
+                        if (GetComponentInParent<Helicopter>() != null)
+                        {
+                            Bullet.GetComponent<PrBullet>().playerBullet = true;
+                        }
                         Bullet.GetComponent<PrBullet>().usePooling = false;
                         Bullet.SetActive(true);
                         Bullet.GetComponent<Rigidbody>().isKinematic = false;
                         Bullet.GetComponent<Collider>().enabled = true;
                         Bullet.GetComponent<PrBullet>().timeToLive = bulletTimeToLive;
                     }
-                        
 
+                    PrBullet prBullet = Bullet.GetComponent<PrBullet>();
+
+
+                   
                     //Object Pooling VFX
                     Muzzle.transform.rotation = transform.rotation;
                     EmitParticles(Muzzle);
 
-                    //Generic 
-                    Bullet.GetComponent<PrBullet>().Damage = BulletDamage;
-                    Bullet.GetComponent<PrBullet>().temperatureMod = tempModFactor;
-                    Bullet.GetComponent<PrBullet>().BulletSpeed = BulletSpeed;
-                    Bullet.GetComponent<PrBullet>().BulletAccel = BulletAccel;
+                    //Generic
+            
+                    prBullet.Damage = BulletDamage;
+                    prBullet.temperatureMod = tempModFactor;
+                    prBullet.BulletSpeed = BulletSpeed;
+                    prBullet.BulletAccel = BulletAccel;
                     if (usePooling)
                         Bullet.transform.localScale = Bullet.GetComponent<PrBullet>().OriginalScale * BulletSize;
 

@@ -761,6 +761,12 @@ public class PumpShotgunScriptLPFP : MonoBehaviour {
 						Spawnpoints.bulletSpawnPoint [i].transform.position,
 						Spawnpoints.bulletSpawnPoint [i].transform.rotation);
 
+
+
+					if(transform.GetComponentInParent<Helicopter>()!=null)
+					{
+						bullet.GetComponent<PrBullet>().playerBullet = true;
+					}
 					//Add velocity to the bullets
 					bullet.GetComponent<Rigidbody>().velocity = 
 						bullet.transform.forward * bulletForce;

@@ -80,20 +80,27 @@ public class GameManager : MonoBehaviour
 
     public void GameWin() {
 
-        Invoke("GameWinDelay",1f);
+        Time.timeScale = 0.5f;
+        Invoke("GameWinDelay",0.5f);
     }
     void GameWinDelay()
     {
+        Time.timeScale = 1f;
+
         PlayerPrefs.SetInt("Level", (CurrentLevel + 1));
         SceneManager.LoadScene("GameWin");
     }
     public void GameOver() {
-        Invoke("GameOverDelay", 1f);
+        Time.timeScale = 0.5f;
+
+        Invoke("GameOverDelay", 0.3f);
 
     }
 
     void GameOverDelay()
     {
+        Time.timeScale = 1f;
+
         SceneManager.LoadScene("GameOver");
     }
     public void Score() {
