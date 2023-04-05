@@ -29,7 +29,7 @@ public class MenuManager : MonoBehaviour {
 
 	public void LoadLevel(){
 
-		SceneManager.LoadScene ("Game");
+		//SceneManager.LoadScene ("Game");
 	}
 
 
