@@ -47,12 +47,16 @@ public class CrazyGamesInterstitialAdManager : IInterstatialAdManager
     {
         _adInstance.OnAdClosed += OnAdClosed;
         _adInstance.OnAdOpened += OnAdOpened;
+        _adInstance.onAdError += OnAdClosed;
+        _adInstance.onAdError += () => Debug.Log("bi seylers");
     }
 
     private void UnRegisterEvents()
     {
         _adInstance.OnAdClosed -= OnAdClosed;
         _adInstance.OnAdOpened -= OnAdOpened;
+        _adInstance.onAdError -= OnAdClosed;
+
     }
 
     public void RegisterOnAdClickedEvent(Action<IronSourceAdInfo> method)

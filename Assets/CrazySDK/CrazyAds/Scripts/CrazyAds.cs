@@ -19,7 +19,7 @@ namespace CrazyGames
 
         public delegate void AdErrorCallback();
 
-        private AdErrorCallback onAdError;
+        public AdErrorCallback onAdError;
 
         private bool _isRunningAd;
         private bool origRunInBackground;

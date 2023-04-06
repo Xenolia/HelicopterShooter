@@ -31,7 +31,7 @@ public class AdManager : MonoBehaviour
     public Action OnBeforeLoadingAds;
     private void Awake()
     {
-        //Init();
+        Init();
     }
 
  

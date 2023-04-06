@@ -40,6 +40,8 @@ public class GameManager : MonoBehaviour
     {
         started = false;
         CurrentLevel = PlayerPrefs.GetInt("Level", 0);
+
+         
         level.text = "MISSION " + (CurrentLevel + 1);
         int currentPlayer = PlayerPrefs.GetInt("Player", 0);
         players[currentPlayer].SetActive(true);

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -17,24 +18,44 @@ public class IntersitialHelper : MonoBehaviour
     }
     public void LoadLevelWithIntersitial()
     {
-        if (adManager.InterstatialAdManager.IsInterstatialAdReady())
+        if(!adManager)
         {
-
+            adManager = GetComponent<AdManager>();
+        }
+         if (adManager.InterstatialAdManager.IsInterstatialAdReady())
+        {
+            adManager.InterstatialAdManager.RegisterOnAdShowFailedEvent(OnAdClosed2);
+            adManager.InterstatialAdManager.RegisterOnAdLoadFailedEvent(OnAdClosed3);
             adManager.InterstatialAdManager.RegisterOnAdClosedEvent(OnAdClosed);
-            adManager.InterstatialAdManager.ShowAd();
-        }
-        else
-        {
-            SceneManager.LoadScene("Game");
-        }
-    }
-
  
+            adManager.InterstatialAdManager.ShowAd();
+        } 
+            SceneManager.LoadScene("Game"); 
+    }
+ 
+    private void OnAdClosed3(IronSourceError arg1)
+    {
+        adManager.InterstatialAdManager.UnRegisterOnAdShowFailedEvent(OnAdClosed2);
+        adManager.InterstatialAdManager.UnRegisterOnAdLoadFailedEvent(OnAdClosed3);
+
+        adManager.InterstatialAdManager.UnRegisterOnAdClosedEvent(OnAdClosed);
+         
+    }
+    private void OnAdClosed2(IronSourceError arg1, IronSourceAdInfo arg2)
+    {
+        adManager.InterstatialAdManager.UnRegisterOnAdShowFailedEvent(OnAdClosed2);
+        adManager.InterstatialAdManager.UnRegisterOnAdLoadFailedEvent(OnAdClosed3);
+
+        adManager.InterstatialAdManager.UnRegisterOnAdClosedEvent(OnAdClosed);
+         
+     }
+
     private void OnAdClosed(IronSourceAdInfo info)
     {
-        adManager.InterstatialAdManager.UnRegisterOnAdClosedEvent(OnAdClosed);
+        adManager.InterstatialAdManager.UnRegisterOnAdShowFailedEvent(OnAdClosed2);
+        adManager.InterstatialAdManager.UnRegisterOnAdLoadFailedEvent(OnAdClosed3);
 
-        SceneManager.LoadScene("Game");
-        adManager.InterstatialAdManager.LoadAds();
-    }
+        adManager.InterstatialAdManager.UnRegisterOnAdClosedEvent(OnAdClosed);
+         
+     }
 }

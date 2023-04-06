@@ -15,10 +15,13 @@ public class MenuManager : MonoBehaviour {
 
     int CurrentLevel;
     int coins;
-	
+    private void Awake()
+    {
+        FindObjectOfType<AdManager>().Init();
+    }
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
       
             CurrentLevel = PlayerPrefs.GetInt("Level", 0);
             CurrentLevelText.text = "MISSION: " + (CurrentLevel+1);
@@ -29,7 +32,7 @@ public class MenuManager : MonoBehaviour {
 
 	public void LoadLevel(){
 
-		//SceneManager.LoadScene ("Game");
+		SceneManager.LoadScene ("Game");
 	}
 
 
