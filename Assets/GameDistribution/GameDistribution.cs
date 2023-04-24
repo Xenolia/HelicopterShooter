@@ -4,8 +4,6 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using UnityEngine;
 using System.Text.RegularExpressions;
-
-#if EN_GDAD
 public class GameDistribution : MonoBehaviour
 {
     public static GameDistribution Instance;
@@ -29,35 +27,50 @@ public class GameDistribution : MonoBehaviour
     private static extern void SDK_ShowAd(string adType);
     [DllImport("__Internal")]
     private static extern void SDK_SendEvent(string options);
+
     private bool _isRewardedVideoLoaded = false;
+
+    bool firstTime = false;
 
     void Awake()
     {
-        //Init();
-    }
-
-    public void Init()
-    {
         if (GameDistribution.Instance == null)
+        {
             GameDistribution.Instance = this;
+            firstTime = true;
+        }
         else
             Destroy(this);
 
         DontDestroyOnLoad(this);
 
+        Init();
+    }
+
+ public   void Init()
+    {
         try
         {
             SDK_Init(GAME_KEY);
+
+           if(firstTime)
+            {
+                firstTime = false;
+                Invoke("PreRoll",0.5f);
+            }
         }
         catch (EntryPointNotFoundException e)
         {
             Debug.LogWarning("GD initialization failed. Make sure you are running a WebGL build in a browser:" + e.Message);
         }
     }
+    [SerializeField] AdManager adManager;
+    void PreRoll()
+    {
+        adManager.InterstatialAdManager.ShowAd();
+    }
     internal void ShowAd()
     {
-        GameDistribution.OnPauseGame += () => Debug.Log("Test from inside pause");
-        GameDistribution.OnResumeGame += () => Debug.Log("Test froun indside resume");
         try
         {
             SDK_ShowAd(null);
@@ -162,4 +175,3 @@ public class GameDistribution : MonoBehaviour
         return _isRewardedVideoLoaded;
     }
 }
-#endif

@@ -52,6 +52,10 @@ public class GDFacade : MonoBehaviour
         //            gd.Init();
         //        }
         //;
+        if(_gameDistribution==null)
+        {
+            _gameDistribution = FindObjectOfType<GameDistribution>();
+        }
         _gameDistribution.Init();
 
         _rewardedAdManager = new GameDistrubutionRewardedAdManager();
