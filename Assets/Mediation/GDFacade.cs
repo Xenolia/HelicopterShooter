@@ -24,6 +24,12 @@ public class GDFacade : MonoBehaviour
         Debug.Log("Facade Init 1");
 
 #if GAME_MONOTIZE
+
+
+        if(_gameMonetize==null)
+        {
+            _gameMonetize = FindObjectOfType<GameMonetize>();
+        }
         _gameMonetize.Init();
 
         _rewardedAdManager = new GameMonatizeRewardedAdManager();
