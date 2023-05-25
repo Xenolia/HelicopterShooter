@@ -121,6 +121,8 @@ public class GameMonatizeInterstatialAdManager : IInterstatialAdManager
 
     private void OnAdOpened()
     {
+        AudioListener.volume = 0f;
+
         _lastTimeScale = Time.timeScale;
         Time.timeScale = 0;
         OnInterstatialAdOpend?.Invoke(null);
@@ -128,7 +130,9 @@ public class GameMonatizeInterstatialAdManager : IInterstatialAdManager
 
     private void OnAdClosed()
     {
-        Time.timeScale = _lastTimeScale;
+        AudioListener.volume = 1f;
+
+        Time.timeScale = 1f;
         OnInterstatialAdClosed?.Invoke(null);   
     }
 }
