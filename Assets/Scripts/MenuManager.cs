@@ -16,11 +16,11 @@ public class MenuManager : MonoBehaviour {
     int CurrentLevel;
     int coins;
 
-    AdManager adManager;
+    [SerializeField] AdManager adManager;
 
     private void Awake()
     {
-       adManager= FindObjectOfType<AdManager>() ;
+        adManager.Init();
      }
 
     // Use this for initializatino
@@ -35,16 +35,20 @@ public class MenuManager : MonoBehaviour {
 
 	public void LoadLevel(){
         if (adManager.InterstatialAdManager.IsInterstatialAdReady())
-
-
         {
+            adManager.InterstatialAdManager.RegisterOnAdClosedEvent(OnAdClosed);
             adManager.InterstatialAdManager.ShowAd();
         }
-        SceneManager.LoadScene ("Game");
 	}
 
+    private void OnAdClosed(IronSourceAdInfo info)
+    {
+        adManager.InterstatialAdManager.UnRegisterOnAdClosedEvent(OnAdClosed);
+        SceneManager.LoadScene("Game");
 
-	public void RateUs ()
+    }
+
+    public void RateUs ()
 	{
       //  Application.OpenURL(RateUsUrl);
 
