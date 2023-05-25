@@ -12,7 +12,7 @@ public class Helicopter : MonoBehaviour
      
     void Start()
     {
-        GameManager gameManager= GameObject.Find("GameManager").GetComponent<GameManager>();
+        GameManager2 gameManager= GameObject.Find("GameManager").GetComponent<GameManager2>();
         speed = speed-(gameManager.CurrentLevel/10f);
         maxStepCount = gameManager.Level[gameManager.CurrentLevel].GetComponent<FloorCount>().floorCount;
         stepped = false;

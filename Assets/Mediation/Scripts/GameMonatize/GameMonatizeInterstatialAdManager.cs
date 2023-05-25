@@ -61,7 +61,7 @@ public class GameMonatizeInterstatialAdManager : IInterstatialAdManager
 
     public void RegisterOnAdReadyEvent(Action<IronSourceAdInfo> method)
     {
-   
+        throw new NotImplementedException();
     }
 
     public void RegisterOnAdShowFailedEvent(Action<IronSourceError, IronSourceAdInfo> method)
@@ -76,7 +76,7 @@ public class GameMonatizeInterstatialAdManager : IInterstatialAdManager
 
     public void ShowAd()
     {
-        _instance.ShowAd();
+
     }
 
     public void TerminateAd()
@@ -128,7 +128,7 @@ public class GameMonatizeInterstatialAdManager : IInterstatialAdManager
 
     private void OnAdClosed()
     {
-        Time.timeScale = 1;
+        Time.timeScale = _lastTimeScale;
         OnInterstatialAdClosed?.Invoke(null);   
     }
 }

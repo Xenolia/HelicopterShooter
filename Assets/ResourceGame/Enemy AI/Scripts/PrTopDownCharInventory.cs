@@ -1650,7 +1650,7 @@ public class PrTopDownCharInventory : MonoBehaviour {
 
         Destroy(charController);
         Destroy(GetComponent<Collider>());
-        GameManager.instance.GameOver();
+        GameManager2.instance.GameOver();
         //Destroy(this);
         
 

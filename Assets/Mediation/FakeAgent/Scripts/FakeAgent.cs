@@ -317,6 +317,11 @@ public class FakeAgent : IronSourceIAgent
     {
         Debug.Log("Fake agent complated the validation");
     }
+
+    public void launchTestSuite()
+    {
+        throw new System.NotImplementedException();
+    }
 }
 
 public static class Extension

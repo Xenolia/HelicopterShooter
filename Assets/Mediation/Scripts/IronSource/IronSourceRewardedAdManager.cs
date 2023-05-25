@@ -8,7 +8,7 @@ public class IronSourceRewardedAdManager : IRewardedAdManager
 {
     private float _reLoadDuration = 5f;
     private RewardedAdRegisterator _rewardedAdRegisterator;
-   // private AudioListener _audioListener;
+    private AudioListener _audioListener;
     private float _lastTimeScale;
     public IronSourceRewardedAdManager()
     {
@@ -21,7 +21,7 @@ public class IronSourceRewardedAdManager : IRewardedAdManager
         RegisterOnAdOpenedEvent(OnAdOpened);
         //RegisterOnUserEarnedRewarededEvent(OnUserEarnedReward);
 
-        //_audioListener = Camera.main.GetComponent<AudioListener>();
+        _audioListener = Camera.main.GetComponent<AudioListener>();
     }
 
     public bool IsRewardedAdReady()
@@ -80,7 +80,7 @@ public class IronSourceRewardedAdManager : IRewardedAdManager
     private void OnUserEarnedReward(IronSourcePlacement placement, IronSourceAdInfo info)
     {
         Time.timeScale = _lastTimeScale;
-        //_audioListener.enabled = true;
+        _audioListener.enabled = true;
     }
 
     public void LoadAds()

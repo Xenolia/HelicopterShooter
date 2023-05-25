@@ -15,12 +15,15 @@ public class MenuManager : MonoBehaviour {
 
     int CurrentLevel;
     int coins;
+
+    AdManager adManager;
+
     private void Awake()
     {
-        FindObjectOfType<AdManager>().Init();
-    }
+       adManager= FindObjectOfType<AdManager>() ;
+     }
 
-    // Use this for initialization
+    // Use this for initializatino
     void Start () {
       
             CurrentLevel = PlayerPrefs.GetInt("Level", 0);
@@ -31,8 +34,13 @@ public class MenuManager : MonoBehaviour {
 
 
 	public void LoadLevel(){
+        if (adManager.InterstatialAdManager.IsInterstatialAdReady())
 
-		SceneManager.LoadScene ("Game");
+
+        {
+            adManager.InterstatialAdManager.ShowAd();
+        }
+        SceneManager.LoadScene ("Game");
 	}
 
 
@@ -52,11 +60,24 @@ public class MenuManager : MonoBehaviour {
     public void Restart()
     {
 
+        if (adManager.InterstatialAdManager.IsInterstatialAdReady())
+
+
+        {
+            adManager.InterstatialAdManager.ShowAd();
+        }
         SceneManager.LoadScene("Game");
     }
 
     public void Home()
     {
+
+        if (adManager.InterstatialAdManager.IsInterstatialAdReady())
+
+
+        {
+            adManager.InterstatialAdManager.ShowAd();
+        }
         SceneManager.LoadScene("Menu");
 
     }

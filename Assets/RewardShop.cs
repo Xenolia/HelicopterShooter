@@ -12,9 +12,12 @@ public class RewardShop : MonoBehaviour
     private void Awake()
     {
         _adManager = FindObjectOfType<AdManager>();
+ 
     }
     public void ShowRewardAd()
     {
+        _adManager = FindObjectOfType<AdManager>();
+
         if (_adManager.RewardedAdManager.IsRewardedAdReady())
         {
             _adManager.RewardedAdManager.RegisterOnUserEarnedRewarededEvent(OnUserEarnedReward);

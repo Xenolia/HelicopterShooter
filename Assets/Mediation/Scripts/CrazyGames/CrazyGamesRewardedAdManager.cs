@@ -27,8 +27,6 @@ public class CrazyGamesRewardedAdManager : IRewardedAdManager
     {
         _adInstance = CrazyAds.Instance;
         _sdkInstance = CrazySDK.Instance;
-
-        
     }
 
     public void RegisterOnAdLoadFailedEvent(Action<IronSourceError> method)
@@ -157,13 +155,15 @@ public class CrazyGamesRewardedAdManager : IRewardedAdManager
 
     private void OnAdOpened()
     {
-        Time.timeScale = 1f;
+        AudioListener.volume = 0f;
+        Time.timeScale = 0f;
         Debug.Log("OnRewardedAdOpened");
         ORewardednAdOpenedEvent?.Invoke(null);
     }
 
     private void OnAdClosed()
     {
+        AudioListener.volume = 1f;
         Time.timeScale = 1f;
         Debug.Log("OnRewardedAdClosed");
         OnRewardedAdClosedEvent?.Invoke(null);

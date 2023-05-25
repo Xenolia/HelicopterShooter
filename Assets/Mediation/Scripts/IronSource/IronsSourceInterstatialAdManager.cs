@@ -14,8 +14,6 @@ public class IronsSourceInterstatialAdManager : IInterstatialAdManager
         IronSource.Agent.loadInterstitial();
       //  RegisterIronSourceInterstatialEvents();
         RegisterOnAdLoadFailedEvent(OnAdLoadFailed);
-        RegisterOnAdOpenedEvent(OnAdOpened);
-        RegisterOnAdClosedEvent(OnAdClosed);
     }
 
     public bool IsInterstatialAdReady()
@@ -126,16 +124,6 @@ public class IronsSourceInterstatialAdManager : IInterstatialAdManager
     {
         // IronSourceInterstitialEvents.ResetEvents();
         UnRegisterIronSourceInterstatialEvents();
-    }
-
-    private void OnAdOpened(IronSourceAdInfo info)
-    {
-        AudioListener.volume = 0;
-    }
-
-    private void OnAdClosed(IronSourceAdInfo info)
-    {
-        AudioListener.volume = 1f;
     }
 
     public void RegisterIronSourceInterstatialEvents()

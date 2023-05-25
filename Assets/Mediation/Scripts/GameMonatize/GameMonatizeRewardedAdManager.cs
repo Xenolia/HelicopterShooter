@@ -1,4 +1,3 @@
-using DG.Tweening;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -8,22 +7,16 @@ public class GameMonatizeRewardedAdManager : IRewardedAdManager
 {
     private Action<IronSourceAdInfo> OnRewardedAdOpened;
     private Action<IronSourceAdInfo> OnRewardedAdClosed;
-    private Action<IronSourcePlacement, IronSourceAdInfo> OnUserEarnedReward;
+
     private float _lastTimeScale;
-
-    private GameMonetize _instance;
-
-    private static bool _isAddReady = true;
-
-    private int counter = 0;
     public GameMonatizeRewardedAdManager()
     {
-        _instance = GameMonetize.Instance;
+
     }
 
     public bool IsRewardedAdReady()
     {
-       return _isAddReady;
+       return true;
     }
 
     public void LoadAds()
@@ -40,7 +33,6 @@ public class GameMonatizeRewardedAdManager : IRewardedAdManager
     {
         GameMonetize.OnResumeGame += OnAdClosed;
         GameMonetize.OnPauseGame += OnAdOpened;
-    
     }
     private void UnRegisterIronSourceEvents()
     {
@@ -55,7 +47,7 @@ public class GameMonatizeRewardedAdManager : IRewardedAdManager
 
     public void RegisterOnAdClosedEvent(Action<IronSourceAdInfo> method)
     {
-        OnRewardedAdClosed += method;
+        OnRewardedAdClosed+= method;
     }
 
     public void RegisterOnAdLoadFailedEvent(Action<IronSourceError> method)
@@ -85,12 +77,12 @@ public class GameMonatizeRewardedAdManager : IRewardedAdManager
 
     public void RegisterOnUserEarnedRewarededEvent(Action<IronSourcePlacement, IronSourceAdInfo> method)
     {
-        OnUserEarnedReward += method;
+        
     }
 
     public void ShowAd()
     {
-        _instance.ShowAd();
+
     }
 
     public void TerminateAd()
@@ -140,30 +132,19 @@ public class GameMonatizeRewardedAdManager : IRewardedAdManager
 
     public void UnRegisterOnUserEarnedRewarededEvent(Action<IronSourcePlacement, IronSourceAdInfo> method)
     {
-        OnUserEarnedReward -= method;
+   
     }
 
     private void OnAdOpened()
     {
-        _isAddReady = false;
-        float x = 0;
-
-        DOTween.To(() => x, newValue => x = newValue, 1f, 110f).SetUpdate(true).OnComplete(SetTrue);
-
         OnRewardedAdOpened?.Invoke(null);
         _lastTimeScale = Time.timeScale;
         Time.timeScale = 0;
-
-        void SetTrue()
-        {
-            _isAddReady = true;
-        }
     }
 
     private void OnAdClosed()
     {
-        Time.timeScale = 1;
-        OnUserEarnedReward?.Invoke(null, null);
+        Time.timeScale = _lastTimeScale;
         OnRewardedAdClosed?.Invoke(null);
     }
 }

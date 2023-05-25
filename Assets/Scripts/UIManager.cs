@@ -8,7 +8,7 @@ public class UIManager : MonoBehaviour
 {
     public Text CurrentLevelText, Totalcoins;
     int CurrentLevel;
-   
+    AdManager adManager;
     void Start()
     {
         Cursor.lockState = CursorLockMode.None;
@@ -24,6 +24,8 @@ public class UIManager : MonoBehaviour
         }
         Totalcoins.text = "$" + PlayerPrefs.GetInt("COINS", 0);
         // PlayerPrefs.SetInt("Level", (CurrentLevel + 1));
+
+        adManager = FindObjectOfType<AdManager>();
      }
 
     // Update is called once per frame
@@ -36,12 +38,24 @@ public class UIManager : MonoBehaviour
 
     public void Shop()
     {
+
+        if (adManager.InterstatialAdManager.IsInterstatialAdReady())
+
+
+        {
+            adManager.InterstatialAdManager.ShowAd();
+        }
         SceneManager.LoadScene("Shop");
 
     }
     public void Restart()
     {
+        if(adManager.InterstatialAdManager.IsInterstatialAdReady())
 
+
+        {
+            adManager.InterstatialAdManager.ShowAd();
+        }
         SceneManager.LoadScene("Game");
     }
 }

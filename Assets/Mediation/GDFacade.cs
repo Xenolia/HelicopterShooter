@@ -19,17 +19,19 @@ public class GDFacade : MonoBehaviour
 #if GAME_MONOTIZE
     [SerializeField] private GameMonetize _gameMonetize;
 #endif
+
+#if LAGGED
+    [SerializeField] private LaggedAPIUnity _laggedAPIUnity;
+#endif
+
+#if YANDEX_GAMES
+    [SerializeField] private YandexSDK _yandexSDK;
+#endif
     public void Init()
     {
         Debug.Log("Facade Init 1");
 
 #if GAME_MONOTIZE
-
-
-        if(_gameMonetize==null)
-        {
-            _gameMonetize = FindObjectOfType<GameMonetize>();
-        }
         _gameMonetize.Init();
 
         _rewardedAdManager = new GameMonatizeRewardedAdManager();
@@ -58,15 +60,29 @@ public class GDFacade : MonoBehaviour
         //            gd.Init();
         //        }
         //;
-        if(_gameDistribution==null)
-        {
-            _gameDistribution = FindObjectOfType<GameDistribution>();
-        }
         _gameDistribution.Init();
 
         _rewardedAdManager = new GameDistrubutionRewardedAdManager();
         _interstatialAdManager = new GameDistrubutionInterstatialAdManager();
         _bannerAdManager = new GameDistrubutionBannerAdManager();
+#endif
+
+#if LAGGED
+        _laggedAPIUnity.Init();
+
+        _rewardedAdManager = new LaggedRewardedAdManager();
+        _interstatialAdManager = new LaggedInterstatialAdManager();
+        _bannerAdManager = new LaggedBannerAdManager();
+
+        return;
+#endif
+
+#if YANDEX_GAMES
+        _yandexSDK.Init();
+
+        _rewardedAdManager = new YandexRewardedAdManager();
+        _interstatialAdManager = new YandexInterstatialAdManager();
+        _bannerAdManager = new YandexBannerAdManager();
 #endif
     }
 

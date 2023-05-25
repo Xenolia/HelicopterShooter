@@ -1,5 +1,5 @@
 
- using System;
+using System;
 //using static CrazyGames.CrazyBanner;
 
 public interface IRewardedAdManager

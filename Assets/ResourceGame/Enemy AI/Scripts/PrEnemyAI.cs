@@ -724,7 +724,7 @@ public class PrEnemyAI : MonoBehaviour
         } 
         dead = true;
        
-        GameManager.instance.AddMoney();
+        GameManager2.instance.AddMoney();
     }
 
     void EnableArmIK(bool active)

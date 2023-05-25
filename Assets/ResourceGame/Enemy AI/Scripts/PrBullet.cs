@@ -316,7 +316,7 @@ public class PrBullet : MonoBehaviour {
                     return;
 
                 }
-                GameManager.instance.Score();
+                GameManager2.instance.Score();
 
 
 
