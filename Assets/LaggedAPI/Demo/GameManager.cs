@@ -2,7 +2,6 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-#if LAGGED
 public class GameManager : MonoBehaviour
 {
     public Text gameControlText;
@@ -144,5 +143,3 @@ public class GameManager : MonoBehaviour
         LaggedAPIUnity.Instance.SaveAchievement(award);
     }
 }
-
-#endif
